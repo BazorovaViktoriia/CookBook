@@ -2,50 +2,58 @@ package BookForm;
 import BookActions.BreakfastListener;
 import BookActions.MeatListener;
 import BookActions.SoupListener;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class CookBookFrame  {
 
-    public JPanel createContentPane (){
+public class CookBookFrame extends JFrame {
 
-        JPanel totalGUI = new JPanel();
-        totalGUI.setLayout(null);
+    public CookBookFrame (){
+        JFrame frame = new JFrame();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(400, 200, 700, 500);
+        setTitle("Кулинарная книга");
+        setContentPane(new Fon());
 
-        JLabel label = new JLabel("1Просто и со вкусом " );
+        Container cont = getContentPane();
+
+        JLabel label = new JLabel("1Просто и со вкусом ");
         label.setLocation(10, 10);
         label.setSize(300, 100);
-        label.setHorizontalAlignment(0);
-        label.setForeground(Color.blue);
-        totalGUI.add(label); // добавляем текстовую метку на поверхность
-
+        cont.add(label); // добавляем текстовую метку на поверхность
 
         JButton breakfast = new JButton("Breakfast");
         breakfast.setLocation(100, 100);
-        breakfast.setSize(200,50 );
-        // создаём объект-обработчик события
-        ActionListener breakfastListener = new BreakfastListener(); // создаём  действие
-        // назначаем этот обработчик кнопке
-        breakfast.addActionListener(breakfastListener);// прикрепляем действие к кнопке (срабоет по нажатии на неё)
-        totalGUI.add(breakfast);
+        breakfast.setSize(200, 50);
+        ActionListener breakfastListener = new BreakfastListener(); // создаём объект-обработчик события
+        breakfast.addActionListener(breakfastListener);// назначаем этот обработчик кнопке
+        cont.add(breakfast); // прикрепляем действие к кнопке (срабоет по нажатии на неё)
 
         JButton soup = new JButton("Soup");
         soup.setLocation(200, 200);
-        soup.setSize(200, 50 );
+        soup.setSize(200, 50);
         ActionListener soupListener = new SoupListener();
         soup.addActionListener(soupListener);
-        totalGUI.add(soup);
+        cont.add(soup);
 
         JButton meat = new JButton("Meat");
         meat.setLocation(300, 300);
         meat.setSize(200, 50);
-        ActionListener meatListener  = new MeatListener();
+        ActionListener meatListener = new MeatListener();
         meat.addActionListener(meatListener);
-        totalGUI.add(meat);
+        cont.add(meat);
 
-        totalGUI.setOpaque(true);
-        return totalGUI;
+        setLayout(null);
+
     }
 }
+ class Fon extends JPanel {
+    public void paintComponent(Graphics g) {
+        ImageIcon fon_ = new ImageIcon("src/fon.jpg");
+        Image fon = fon_.getImage();
+        g.drawImage(fon, 0, 0, this);
+    }
+}
+
+
